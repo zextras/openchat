@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/zimlet/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extension/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extension/extensionlib/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/extension/res" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/docs-src/build" />
+      <excludeFolder url="file://$MODULE_DIR$/docs-src/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/extension/build" />
+      <excludeFolder url="file://$MODULE_DIR$/extension/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/zimlet/build" />
+      <excludeFolder url="file://$MODULE_DIR$/zimlet/dist" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -42,6 +42,22 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 	mkdir -p build/extension
 	cp extension/dist/openchat.jar build/extension/
 
+# Documentation
+docs-src/dist/admin-guide.pdf:
+	cd docs-src && make dist/admin-guide.pdf
+ 
+build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
+	mkdir -p build
+	cp docs-src/dist/admin-guide.pdf build/
+
+docs-src/dist/user-guide.pdf:
+	cd docs-src && make dist/user-guide.pdf
+
+build/user-guide.pdf: docs-src/dist/user-guide.pdf
+	mkdir -p build
+	cp docs-src/dist/user-guide.pdf build/
+
+
 # Project files
 build/LICENSE:
 	mkdir -p build
@@ -50,7 +66,9 @@ build/LICENSE:
 build/openchat.md5: build/LICENSE \
 					build/zimlet/com_zextras_chat_open.zip \
 					build/extension/openchat.jar \
-					build/extension/zal.jar
+					build/extension/zal.jar \
+					build/admin-guide.pdf \
+					build/user-guide.pdf
 	mkdir -p build
 	cd build && find . -type f -not -name "openchat.md5" -exec md5sum "{}" + > openchat.md5
 
@@ -58,6 +76,8 @@ dist/openchat.tgz: build/LICENSE \
 					build/zimlet/com_zextras_chat_open.zip \
 					build/extension/openchat.jar \
 					build/extension/zal.jar \
+					build/admin-guide.pdf \
+					build/user-guide.pdf \
 					build/openchat.md5
 	mkdir -p build
 	mkdir -p dist
@@ -65,8 +85,11 @@ dist/openchat.tgz: build/LICENSE \
 		zimlet/com_zextras_chat_open.zip	\
 		extension/openchat.jar \
 		extension/zal.jar \
+		admin-guide.pdf \
+		user-guide.pdf \
 		LICENSE \
-		openchat.md5
+		openchat.md5 \
+		--owner=0 --group=0
 
 dist/openchat.md5: dist/openchat.tgz
 	cd dist && md5sum openchat.tgz > openchat.md5
@@ -77,7 +100,10 @@ clean:
 		build/zimlet/com_zextras_chat_open.zip \
 		build/extension/openchat.jar \
 		build/extension/zal.jar \
+		build/admin-guide.pdf \
+		build/user-guide.pdf \
 		dist/openchat.tgz \
 		dist/openchat.md5
 	cd zimlet && make clean
 	cd extension && ant clean
+	cd docs-src && make clean
