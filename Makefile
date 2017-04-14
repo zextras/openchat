@@ -57,7 +57,6 @@ build/user-guide.pdf: docs-src/dist/user-guide.pdf
 	mkdir -p build
 	cp docs-src/dist/user-guide.pdf build/
 
-
 # Project files
 build/LICENSE:
 	mkdir -p build

@@ -1,1 +1,17 @@
-%\newcommand{\documentTitle}{Titolo documento}
+\input{build/variables}
+
+\begin{filecontents*}{excuses.txt}
+Excuse
+"are weird"
+"does not like simple things"
+"like to compile things, also documentation papers"
+"doen't want to"
+"want to write showy functions"
+"can live eating only pizza"
+"eat weird things"
+\end{filecontents*}
+
+\DTLloadrawdb[keys={Excuse}]{excusesToUseLatex}{excuses.txt} % Load excuses
+\edef\TmpRandomExcuse{\number\numexpr1+\pdfuniformdeviate\DTLrowcount{excusesToUseLatex}} % Identify random excuse
+\dtlgetrow{excusesToUseLatex}{\TmpRandomExcuse} % Retrieve random excuse
+\dtlgetentryfromcurrentrow{\ExcuseToUseLatex}{1}
