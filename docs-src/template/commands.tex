@@ -1,14 +1,66 @@
 \input{build/variables}
 
+\newcommand\dangersign[1][2ex]{
+  \renewcommand\stacktype{L}
+  \scaleto{\stackon[.3pt]{\color{red}$\triangle$}{\tiny\bfseries !}}{#1}
+}
+
+\newcommand\infosign[1][2ex]{
+  \renewcommand\stacktype{L}
+  \scaleto{\stackon[1pt]{\color{blue}$\mdlgwhtcircle$}{\tiny\bfseries i}}{#1}
+}
+
+\newcommand{\ccbyncsa}{
+  \begingroup
+  \normalfont
+  \includegraphics[height=\fontcharht\font`\B]{images/cc-by-nc-sa.png}
+  \endgroup
+}
+
+\newenvironment{warning}
+{
+    \par
+    \begin{list}{}{
+        \leftmargin=5ex
+        \labelwidth=
+        \leftmargin
+    }
+    \item[
+        \dangersign
+    ]
+}
+{
+    \end{list}
+    \par
+}
+
+\newenvironment{info}
+{
+    \par
+    \begin{list}{}{
+        \leftmargin=5ex
+        \labelwidth=
+        \leftmargin
+    }
+    \item[
+        \infosign
+    ]
+}
+{
+    \end{list}
+    \par
+}
+
 \begin{filecontents*}{excuses.txt}
 Excuse
 "are weird"
 "does not like simple things"
 "like to compile things, also documentation papers"
-"doen't want to"
+"doesn't want to"
 "want to write showy functions"
 "can live eating only pizza"
 "eat weird things"
+"developers shouldn't be allowed to take decisions during the Ballmer Peak"
 \end{filecontents*}
 
 \DTLloadrawdb[keys={Excuse}]{excusesToUseLatex}{excuses.txt} % Load excuses
