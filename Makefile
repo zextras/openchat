@@ -45,10 +45,17 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 # Documentation
 docs-src/dist/admin-guide.pdf:
 	cd docs-src && make dist/admin-guide.pdf
+
+docs-src/dist/admin-guide:
+	cd docs-src && make dist/admin-guide
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
 	cp docs-src/dist/admin-guide.pdf build/
+
+build/admin-guide: docs-src/dist/admin-guide
+	mkdir -p build/admin-guide
+	cp -r docs-src/dist/admin-guide build/
 
 docs-src/dist/user-guide.pdf:
 	cd docs-src && make dist/user-guide.pdf
@@ -103,6 +110,7 @@ clean:
 		build/user-guide.pdf \
 		dist/openchat.tgz \
 		dist/openchat.md5
+	rm -rf build/admin-guide
 	cd zimlet && make clean
 	cd extension && ant clean
 	cd docs-src && make clean

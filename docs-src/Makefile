@@ -37,25 +37,32 @@ build/admin-guide.pdf: build/variables.tex
 	pdflatex -output-directory=build admin-guide.tex
 	pdflatex -output-directory=build admin-guide.tex
 
-build/html: build/variables.tex
-	mkdir -p build/html
+build/html/admin-guide: build/variables.tex
+	mkdir -p build/html/admin-guide
 	htlatex admin-guide.tex
 	rm excuses.txt
-	mv admin-guide.4ct build/html
-	mv admin-guide.4tc build/html
-	mv admin-guide.aux build/html
-	mv admin-guide.css build/html
-	mv admin-guide.dvi build/html
-	mv admin-guide.html build/html
-	mv admin-guide.idv build/html
-	mv admin-guide.lg build/html
-	mv admin-guide.log build/html
-	mv admin-guide.tmp build/html
-	mv admin-guide.xref build/html
+	mv admin-guide.4ct build/html/admin-guide
+	mv admin-guide.4tc build/html/admin-guide
+	mv admin-guide.aux build/html/admin-guide
+	mv admin-guide.css build/html/admin-guide
+	mv admin-guide.dvi build/html/admin-guide
+	mv admin-guide.html build/html/admin-guide
+	mv admin-guide2.html build/html/admin-guide
+	mv admin-guide.idv build/html/admin-guide
+	mv admin-guide.lg build/html/admin-guide
+	mv admin-guide.log build/html/admin-guide
+	mv admin-guide.tmp build/html/admin-guide
+	mv admin-guide.xref build/html/admin-guide
+	mv admin-guide.xwm build/html/admin-guide
+	mv admin-guide*.png build/html/admin-guide
 
 dist/admin-guide.pdf: build/admin-guide.pdf
 	mkdir -p dist
 	cp build/admin-guide.pdf dist/admin-guide.pdf
+
+dist/admin-guide: build/html/admin-guide
+	mkdir -p dist/admin-guide
+	cp build/html/admin-guide/* dist/admin-guide
 
 build/user-guide.pdf:
 	mkdir -p build
@@ -84,4 +91,5 @@ clean:
 		dist/user-guide.pdf \
 		build/excuses.txt \
 		excuses.txt
-	rm -rf build/html
+	rm -rf build/html/admin-guide \
+		dist/admin-guide
