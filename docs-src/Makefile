@@ -15,6 +15,8 @@
 # If not, see <http://www.gnu.org/licenses/>.
 #
 
+DOCUMENT_DRAFT?=true
+
 all: dist/admin-guide.pdf dist/user-guide.pdf
 
 .PHONY: clean
@@ -26,7 +28,9 @@ build/variables.tex:
 	echo "\\\newcommand{\\\version}{$(shell git rev-parse --abbrev-ref HEAD | cut -d '/' -f2)}" >> build/variables.tex
 	echo "\\\newcommand{\\\commitId}{$(shell git rev-parse HEAD)}" >> build/variables.tex
 	echo "\\\newcommand{\\\shortCommitId}{$(shell git rev-parse --short HEAD)}" >> build/variables.tex
-	echo "\\\newcommand{\\\INTERNALDOC}{}" >> build/variables.tex # Uncomment if You want to build the internal documentation
+ifeq ("true", "$(DOCUMENT_DRAFT)")
+	echo "\\\newcommand{\\\ISDRAFT}{}" >> build/variables.tex
+endif
 
 build/admin-guide.pdf: build/variables.tex
 	mkdir -p build

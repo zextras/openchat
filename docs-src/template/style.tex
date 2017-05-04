@@ -6,10 +6,16 @@
 \fancyfoot[LE]{
     \textbf{
         \thepage\ |\ \leftmark
+        \ifdefined\ISDRAFT
+           \ - DRAFT
+        \fi
     }
 }
 \fancyfoot[RO]{
     \textbf{
+        \ifdefined\ISDRAFT
+            DRAFT -\
+        \fi
         \rightmark\ |\ \thepage
     }
 }
@@ -27,6 +33,13 @@
 }
 \newcommand{\justifyheading}{\raggedleft}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries\justifyheading}{
+    \ifdefined\ISDRAFT
+        DRAFT of \
+    \fi
     \chaptertitlename\ \thechapter
 }{10pt}{{\titlerule[0.4pt]}\vspace{1pc}\Huge}
 \titlespacing{\chapter}{0pt}{0pt}{100pt}
+
+\ifdefined\ISDRAFT
+    \newwatermark[allpages,color=gray!10,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+\fi
