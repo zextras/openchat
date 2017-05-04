@@ -1,13 +1,12 @@
 \input{build/variables}
 
-\newcommand\dangersign[1][2ex]{
+\newcommand\dangersign[1][2.5ex]{
   \renewcommand\stacktype{L}
   \scaleto{\stackon[.3pt]{\color{red}$\triangle$}{\tiny\bfseries !}}{#1}
 }
-
-\newcommand\infosign[1][2ex]{
+\newcommand\infosign[1][2.5ex]{
   \renewcommand\stacktype{L}
-  \scaleto{\stackon[1pt]{\color{blue}$\mdlgwhtcircle$}{\tiny\bfseries i}}{#1}
+  \scaleto{\stackon[-0.3pt]{\color{blue}$\bigcirc$}{\small\bfseries i}}{#1}
 }
 
 \newcommand{\ccbyncsa}{

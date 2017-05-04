@@ -1,4 +1,5 @@
 \pagestyle{fancy}
+\renewcommand{\familydefault}{\sfdefault}
 \setlength{\parskip}{\baselineskip} % Paragraph padding
 \setlength\parindent{0pt} % Paragraph indent
 \fancyhf{} % Rewrite chapter page
@@ -12,6 +13,8 @@
         \rightmark\ |\ \thepage
     }
 }
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter: #1}{}}
 \renewcommand{\footrulewidth}{0.4pt} % add footer line
 \renewcommand{\headrulewidth}{0pt} % Remove header line
 \fancypagestyle{plain}{
@@ -23,5 +26,7 @@
     }
 }
 \newcommand{\justifyheading}{\raggedleft}
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries\justifyheading}{\chaptertitlename\ \thechapter}{10pt}{{\titlerule[0.4pt]}\vspace{1pc}\Huge}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\justifyheading}{
+    \chaptertitlename\ \thechapter
+}{10pt}{{\titlerule[0.4pt]}\vspace{1pc}\Huge}
 \titlespacing{\chapter}{0pt}{0pt}{100pt}
