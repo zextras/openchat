@@ -37,32 +37,24 @@ build/admin-guide.pdf: build/variables.tex
 	pdflatex -output-directory=build admin-guide.tex
 	pdflatex -output-directory=build admin-guide.tex
 
-build/html/admin-guide: build/variables.tex
-	mkdir -p build/html/admin-guide
-	htlatex admin-guide.tex
-	rm excuses.txt
-	mv admin-guide.4ct build/html/admin-guide
-	mv admin-guide.4tc build/html/admin-guide
-	mv admin-guide.aux build/html/admin-guide
-	mv admin-guide.css build/html/admin-guide
-	mv admin-guide.dvi build/html/admin-guide
-	mv admin-guide.html build/html/admin-guide
-	mv admin-guide2.html build/html/admin-guide
-	mv admin-guide.idv build/html/admin-guide
-	mv admin-guide.lg build/html/admin-guide
-	mv admin-guide.log build/html/admin-guide
-	mv admin-guide.tmp build/html/admin-guide
-	mv admin-guide.xref build/html/admin-guide
-	mv admin-guide.xwm build/html/admin-guide
-	mv admin-guide*.png build/html/admin-guide
+#build/html/admin-guide: build/variables.tex
+#	mkdir -p build/html/admin-guide
+#	mkdir -p build/html/admin-guide/images
+#	htlatex admin-guide.tex
+#	cp images/cc-by-nc-sa.png build/html/admin-guide/images
+#	find . -maxdepth 1 -regex ".*admin-guide[0-9]*x?\.\(4ct\|4tc\|aux\|css\|dvi\|idv\|html\|lg\|log\|png\|tmp\|xref\|xwm\)" \
+#		-type f  -exec mv {} build/html/admin-guide \;
+#	mv excuses.txt build/
+#	find build/html/admin-guide/ -maxdepth 1 -regex ".*admin-guide\.\(4ct\|4tc\|aux\|dvi\|idv\|lg\|log\|tmp\|xref\|xwm\)" \
+#    		-type f  -exec rm {} \;
 
 dist/admin-guide.pdf: build/admin-guide.pdf
 	mkdir -p dist
 	cp build/admin-guide.pdf dist/admin-guide.pdf
 
-dist/admin-guide: build/html/admin-guide
-	mkdir -p dist/admin-guide
-	cp build/html/admin-guide/* dist/admin-guide
+#dist/admin-guide: build/html/admin-guide
+#	mkdir -p dist
+#	cp -r build/html/admin-guide dist
 
 build/user-guide.pdf:
 	mkdir -p build
@@ -81,6 +73,7 @@ clean:
 		build/admin-guide.pdf \
 		build/admin-guide.ptc \
 		build/admin-guide.toc \
+		build/admin-guide.xwm \
 		dist/admin-guide.pdf \
 		build/user-guide.aux \
 		build/user-guide.log \
@@ -88,8 +81,10 @@ clean:
 		build/user-guide.pdf \
 		build/user-guide.ptc \
 		build/user-guide.toc \
+		build/user-guide.xwm \
 		dist/user-guide.pdf \
 		build/excuses.txt \
 		excuses.txt
 	rm -rf build/html/admin-guide \
+		-rf build/html \
 		dist/admin-guide

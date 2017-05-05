@@ -44,18 +44,18 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 
 # Documentation
 docs-src/dist/admin-guide.pdf:
-	cd docs-src && make dist/admin-guide.pdf
+	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=false
 
-docs-src/dist/admin-guide:
-	cd docs-src && make dist/admin-guide
+#docs-src/dist/admin-guide:
+#	cd docs-src && make dist/admin-guide DOCUMENT_DRAFT=false
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
 	cp docs-src/dist/admin-guide.pdf build/
 
-build/admin-guide: docs-src/dist/admin-guide
-	mkdir -p build/admin-guide
-	cp -r docs-src/dist/admin-guide build/
+#build/admin-guide: docs-src/dist/admin-guide
+#	mkdir -p build/admin-guide
+#	cp -r docs-src/dist/admin-guide build/
 
 docs-src/dist/user-guide.pdf:
 	cd docs-src && make dist/user-guide.pdf
