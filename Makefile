@@ -15,6 +15,8 @@
 # If not, see <http://www.gnu.org/licenses/>.
 #
 
+PDFLATEX := $(shell command -v pdflatex 2> /dev/null)
+
 all: dist/openchat.tgz dist/openchat.md5
 
 .PHONY: clean
@@ -44,25 +46,30 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 
 # Documentation
 docs-src/dist/admin-guide.pdf:
-	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=false
-
-#docs-src/dist/admin-guide:
-#	cd docs-src && make dist/admin-guide DOCUMENT_DRAFT=false
+ifdef PDFLATEX
+	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=false;
+else
+	echo -e '#\n#  !!! Warning !!!\n#  Admin guide was not built please install `pdflatex`\n#'
+endif
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
-	cp docs-src/dist/admin-guide.pdf build/
-
-#build/admin-guide: docs-src/dist/admin-guide
-#	mkdir -p build/admin-guide
-#	cp -r docs-src/dist/admin-guide build/
+	if [ -a docs-src/dist/admin-guide.pdf ] ; \
+    then \
+         cp docs-src/dist/admin-guide.pdf build/ ; \
+    fi;
 
 docs-src/dist/user-guide.pdf:
+ifdef PDFLATEX
 	cd docs-src && make dist/user-guide.pdf
+endif
 
 build/user-guide.pdf: docs-src/dist/user-guide.pdf
 	mkdir -p build
-	cp docs-src/dist/user-guide.pdf build/
+	if [ -a docs-src/dist/user-guide.pdf ] ; \
+	then \
+		 cp docs-src/dist/user-guide.pdf build/ ; \
+	fi;
 
 # Project files
 build/LICENSE:
@@ -73,8 +80,7 @@ build/openchat.md5: build/LICENSE \
 					build/zimlet/com_zextras_chat_open.zip \
 					build/extension/openchat.jar \
 					build/extension/zal.jar \
-					build/admin-guide.pdf \
-					build/user-guide.pdf
+					build/admin-guide.pdf
 	mkdir -p build
 	cd build && find . -type f -not -name "openchat.md5" -exec md5sum "{}" + > openchat.md5
 
@@ -83,19 +89,27 @@ dist/openchat.tgz: build/LICENSE \
 					build/extension/openchat.jar \
 					build/extension/zal.jar \
 					build/admin-guide.pdf \
-					build/user-guide.pdf \
 					build/openchat.md5
 	mkdir -p build
 	mkdir -p dist
+ifdef PDFLATEX
 	cd build && tar -czvf ../dist/openchat.tgz \
 		zimlet/com_zextras_chat_open.zip	\
 		extension/openchat.jar \
 		extension/zal.jar \
 		admin-guide.pdf \
-		user-guide.pdf \
 		LICENSE \
 		openchat.md5 \
 		--owner=0 --group=0
+else
+	cd build && tar -czvf ../dist/openchat.tgz \
+		zimlet/com_zextras_chat_open.zip	\
+		extension/openchat.jar \
+		extension/zal.jar \
+		LICENSE \
+		openchat.md5 \
+		--owner=0 --group=0
+endif
 
 dist/openchat.md5: dist/openchat.tgz
 	cd dist && md5sum openchat.tgz > openchat.md5
@@ -107,7 +121,6 @@ clean:
 		build/extension/openchat.jar \
 		build/extension/zal.jar \
 		build/admin-guide.pdf \
-		build/user-guide.pdf \
 		dist/openchat.tgz \
 		dist/openchat.md5
 	rm -rf build/admin-guide
