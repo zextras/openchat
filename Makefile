@@ -46,30 +46,18 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 
 # Documentation
 docs-src/dist/admin-guide.pdf:
-ifdef PDFLATEX
-	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=false;
-else
-	echo -e '#\n#  !!! Warning !!!\n#  Admin guide was not built please install `pdflatex`\n#'
-endif
+	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=true
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
-	if [ -a docs-src/dist/admin-guide.pdf ] ; \
-    then \
-         cp docs-src/dist/admin-guide.pdf build/ ; \
-    fi;
+	 cp docs-src/dist/admin-guide.pdf build/
 
-docs-src/dist/user-guide.pdf:
-ifdef PDFLATEX
-	cd docs-src && make dist/user-guide.pdf
-endif
+#docs-src/dist/user-guide.pdf:
+#	cd docs-src && make dist/user-guide.pdf
 
-build/user-guide.pdf: docs-src/dist/user-guide.pdf
-	mkdir -p build
-	if [ -a docs-src/dist/user-guide.pdf ] ; \
-	then \
-		 cp docs-src/dist/user-guide.pdf build/ ; \
-	fi;
+#build/user-guide.pdf: docs-src/dist/user-guide.pdf
+#	mkdir -p build
+#	cp docs-src/dist/user-guide.pdf build/
 
 # Project files
 build/LICENSE:
