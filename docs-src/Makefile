@@ -76,6 +76,8 @@ dist/admin-guide.adoc: build/admin-guide.adoc
 #	sed -i "s/==\]\]/\]\]/g" dist/asciidoc/admin-guide.adoc
 #	sed -i "s/\[==/<</g" dist/asciidoc/admin-guide.adoc
 #	sed -i "s/==\]/>>/g" dist/asciidoc/admin-guide.adoc
+	sed -i ':a;N;$$!ba;s/TIP:\n\n/TIP\: /g' dist/asciidoc/admin-guide.adoc
+	sed -i ':a;N;$$!ba;s/WARNING:\n\n/WARNING\: /g' dist/asciidoc/admin-guide.adoc
 	mkdir -p dist/asciidoc/images
 	cp images/cc-by-nc-sa.png dist/asciidoc/images
 
