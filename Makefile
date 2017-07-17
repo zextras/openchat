@@ -50,7 +50,14 @@ docs-src/dist/admin-guide.pdf:
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
-	 cp docs-src/dist/admin-guide.pdf build/
+	cp docs-src/dist/admin-guide.pdf build/
+
+docs-src/dist/asciidoc/admin-guide.adoc:
+	cd docs-src && make dist/asciidoc/admin-guide.adoc
+
+build/asciidoc/admin-guide.adoc: docs-src/dist/asciidoc/admin-guide.adoc
+	mkdir -p build
+	cp -r docs-src/dist/asciidoc build/
 
 #docs-src/dist/user-guide.pdf:
 #	cd docs-src && make dist/user-guide.pdf
@@ -103,15 +110,18 @@ dist/openchat.md5: dist/openchat.tgz
 	cd dist && md5sum openchat.tgz > openchat.md5
 
 clean:
-	rm -f build/LICENSE \
+	rm -f -r \
+		build/admin-guide \
+		build/asciidoc \
+		build/LICENSE \
 		build/openchat.md5 \
 		build/zimlet/com_zextras_chat_open.zip \
 		build/extension/openchat.jar \
 		build/extension/zal.jar \
+		build/asciidoc/admin-guide.adoc \
 		build/admin-guide.pdf \
 		dist/openchat.tgz \
 		dist/openchat.md5
-	rm -rf build/admin-guide
 	cd zimlet && make clean
 	cd extension && ant clean
 	cd docs-src && make clean
