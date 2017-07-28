@@ -46,11 +46,15 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 
 # Documentation
 docs-src/dist/admin-guide.pdf:
+ifdef PDFLATEX
 	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=true
+endif
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
 	mkdir -p build
+ifdef PDFLATEX
 	cp docs-src/dist/admin-guide.pdf build/
+endif
 
 docs-src/dist/asciidoc/admin-guide.adoc:
 	cd docs-src && make dist/asciidoc/admin-guide.adoc
