@@ -31,14 +31,14 @@ build/zimlet/com_zextras_chat_open.zip: zimlet/dist/com_zextras_chat_open.zip
 
 # Zimbra Extension
 extension/lib/zal.jar:
-	cd extension && ant download-zal
+	cd extension && make lib/zal.jar
 	
 build/extension/zal.jar: extension/lib/zal.jar
 	mkdir -p build/extension
 	cp extension/lib/zal.jar build/extension/
 
 extension/dist/openchat.jar:
-	cd extension && ant
+	cd extension && make dist/openchat.jar
 
 build/extension/openchat.jar: extension/dist/openchat.jar
 	mkdir -p build/extension
