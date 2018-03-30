@@ -23,7 +23,7 @@ all: dist/openchat.tgz dist/openchat.md5
 
 # Zimlet for Zimbra
 zimlet/dist/com_zextras_chat_open.zip:
-	cd zimlet && make dist/com_zextras_chat_open.zip
+	cd zimlet && make -f makefile dist/com_zextras_chat_open.zip
 
 build/zimlet/com_zextras_chat_open.zip: zimlet/dist/com_zextras_chat_open.zip
 	mkdir -p build/zimlet
@@ -31,14 +31,14 @@ build/zimlet/com_zextras_chat_open.zip: zimlet/dist/com_zextras_chat_open.zip
 
 # Zimbra Extension
 extension/lib/zal.jar:
-	cd extension && make lib/zal.jar
+	cd extension && make -f Makefile lib/zal.jar
 	
 build/extension/zal.jar: extension/lib/zal.jar
 	mkdir -p build/extension
 	cp extension/lib/zal.jar build/extension/
 
 extension/dist/openchat.jar:
-	cd extension && make dist/openchat.jar
+	cd extension && make -f Makefile dist/openchat.jar
 
 build/extension/openchat.jar: extension/dist/openchat.jar
 	mkdir -p build/extension
@@ -47,7 +47,7 @@ build/extension/openchat.jar: extension/dist/openchat.jar
 # Documentation
 docs-src/dist/admin-guide.pdf:
 ifdef PDFLATEX
-	cd docs-src && make dist/admin-guide.pdf DOCUMENT_DRAFT=true
+	cd docs-src && make -f Makefile dist/admin-guide.pdf DOCUMENT_DRAFT=true
 endif
  
 build/admin-guide.pdf: docs-src/dist/admin-guide.pdf
