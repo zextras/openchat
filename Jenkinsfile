@@ -8,6 +8,9 @@ pipeline {
         JAVA_TOOL_OPTIONS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dfile.encoding=UTF8 -Duser.timezone=Europe/Rome"
         TZ="Europe/Rome"
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '50'))
+    }
     stages {
         stage('Make') {
             steps {
