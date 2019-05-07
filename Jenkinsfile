@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Make') {
             steps {
-                sh '. $NVM_DIR/nvm.sh && make all'
+                sh '. load_nvm && make all'
             }
         }
     }
