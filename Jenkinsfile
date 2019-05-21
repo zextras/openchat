@@ -17,6 +17,11 @@ pipeline {
                 sh '. load_nvm && make all'
             }
         }
+        stage('Packaging') {
+            steps {
+                archiveArtifacts artifacts: "dist/openchat.tgz", fingerprint: true
+            }
+        }
     }
     post {
         always {
