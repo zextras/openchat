@@ -1,6 +1,6 @@
 [submodule "zimlet"]
 	path = zimlet
-	url = git@github.com:ZeXtras/openchat-zimlet.git
+	url =  git@bitbucket.org:zextras/openchat-zimlet.git
 [submodule "extension"]
 	path = extension
-	url = git@github.com:ZeXtras/openchat-extension.git
+	url = git@bitbucket.org:zextras/openchat-extension.git
